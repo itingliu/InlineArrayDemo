@@ -10,6 +10,13 @@ let package = Package(
     targets: [
         .target(name: "CStringData"),
         .target(
+            name: "Essentials",
+            dependencies: ["StringData"],
+            swiftSettings: [
+                .enableExperimentalFeature("Lifetimes"),
+            ]
+        ),
+        .target(
             name: "StringData",
             dependencies: ["CStringData"],
             swiftSettings: [
@@ -18,7 +25,7 @@ let package = Package(
         ),
         .executableTarget(
             name: "Demo",
-            dependencies: ["StringData"]
+            dependencies: ["Essentials"]
         ),
     ]
 )
