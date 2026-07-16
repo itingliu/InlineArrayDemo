@@ -8,8 +8,10 @@ let package = Package(
         .library(name: "StringData", targets: ["StringData"]),
     ],
     targets: [
+        .target(name: "CStringData"),
         .target(
             name: "StringData",
+            dependencies: ["CStringData"],
             swiftSettings: [
                 .enableExperimentalFeature("Lifetimes"),
             ]

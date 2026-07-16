@@ -47,3 +47,18 @@ public func slow(_ s0: Int, _ s1: Int) -> String {
     let str1 = arr[s1]
     return "\(str0) \(str1)"
 }
+
+// MARK: - C const array path
+
+import CStringData
+
+// reads from the C `const char *const cArr[3]`
+public func cSearch(_ index: Int, body:(Span<UInt8>) -> ())  {
+    precondition(index < 3)
+    let ptr = cArrayElement(Int32(index))!
+    let count = cArrayElementLength(Int32(index))
+    ptr.withMemoryRebound(to: UInt8.self, capacity: count) { pointer in
+        let span = Span(_unsafeStart: pointer, count: count)
+        body(span)
+    }
+}
