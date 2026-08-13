@@ -5,27 +5,36 @@ let package = Package(
     name: "InlineArrayDemo",
     platforms: [.macOS("26.0")],
     products: [
-        .library(name: "StringData", targets: ["StringData"]),
+        .library(name: "CListFormatData", targets: ["CListFormatData"]),
     ],
     targets: [
-        .target(name: "CStringData"),
+        .target(name: "CListFormatData"),
         .target(
-            name: "Essentials",
-            dependencies: ["StringData"],
+            name: "ListFormatDataC",
+            dependencies: ["CListFormatData"],
             swiftSettings: [
                 .enableExperimentalFeature("Lifetimes"),
             ]
         ),
         .target(
-            name: "StringData",
-            dependencies: ["CStringData"],
+            name: "ListFormatData",
             swiftSettings: [
                 .enableExperimentalFeature("Lifetimes"),
             ]
         ),
         .executableTarget(
-            name: "Demo",
-            dependencies: ["Essentials"]
+            name: "DemoListFormatC",
+            dependencies: ["ListFormatDataC"],
+            swiftSettings: [
+                .enableExperimentalFeature("Lifetimes"),
+            ]
+        ),
+        .executableTarget(
+            name: "DemoListFormatInlineArray",
+            dependencies: ["ListFormatData"],
+            swiftSettings: [
+                .enableExperimentalFeature("Lifetimes"),
+            ]
         ),
     ]
 )
